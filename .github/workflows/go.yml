@@ -1,0 +1,21 @@
+name: "Go (Test / Vet / Build)"
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: "Go (Test / Vet / Build)"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "actions/setup-go@v5"
+        with:
+          go-version-file: "go.mod"
+      - name: "vet"
+        run: "make lint"
+      - name: "test"
+        run: "make test"
+      - name: "build"
+        run: "make build"

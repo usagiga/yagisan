@@ -6,14 +6,6 @@ import (
 	"os"
 )
 
-// Usage: Just import this package
-// such as `import _ "github.com/usagiga/yagisan/lib/log"`
-//
-// This package set default logger of slog,
-// so if you want to write a log, call slog global functions (e.g. slog.Infof())
-// if you want to add fields(such as Trace ID, Request ID, ...) into log in the context,
-// call cslog.WithValue()
-
 // Initialize logger for built-in slog.
 // It relies on github.com/PumpkinSeed/slog-context.
 func init() {

@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/usagiga/yagisan/misc/cli"
-	"github.com/usagiga/yagisan/misc/smtp"
+	"github.com/usagiga/yagisan/misc/scaffold"
 	"log/slog"
 	"os"
 
@@ -11,9 +11,11 @@ import (
 )
 
 func main() {
-	server := smtp.NewSmtpServer()
+	// Building modules
+	server := scaffold.ScaffoldModules()
 	slog.Info("server initialized. ready to serve")
 
+	// Run server
 	err := cli.WithGracefulShutdown(
 		server.ListenAndServeTLS,
 		server.Shutdown,

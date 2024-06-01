@@ -1,7 +1,10 @@
 package smtp
 
-import "context"
+import (
+	"context"
+	"github.com/usagiga/yagisan/model"
+)
 
 type Handler interface {
-	HandleMail(ctx context.Context, from string, content string, to string) (err error)
+	HandleMail(ctx context.Context, mail *model.Mail) (err error)
 }

@@ -7,6 +7,7 @@ import (
 	"github.com/emersion/go-sasl"
 	"github.com/emersion/go-smtp"
 	"github.com/google/uuid"
+	"github.com/usagiga/yagisan/model"
 	"io"
 	"log/slog"
 )
@@ -99,8 +100,14 @@ func (s *SessionImpl) Data(r io.Reader) error {
 	from, _ := ctx.Value(ContextKey_From).(string)
 	to, _ := ctx.Value(ContextKey_To).(string)
 
+	mail := &model.Mail{
+		From: from,
+		To:   to,
+		Body: string(content),
+	}
+
 	// call handler
-	err = s.handler.HandleMail(ctx, from, string(content), to)
+	err = s.handler.HandleMail(ctx, mail)
 	if err != nil {
 		return errors.Wrap(err, "error raised in handler")
 	}
